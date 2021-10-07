@@ -69,10 +69,3 @@ class CustomResNet18:
         x_out = BatchNormalization()(x_out)
         x_out = LeakyReLU()(x_out)
         return x_out
-
-
-#
-# a = 256
-# model = CustomResNet18(input_shape=(a, a, 1), num_filters=16, regularization=0.0005,
-#                        input_name='input', output_name='keypoints', num_predictions=8).build()
-# print(model.summary())
