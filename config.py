@@ -25,8 +25,8 @@ INPUT_NAME = 'input'
 OUTPUT_NAME = 'keypoints'
 
 # Paths to weights and saved model.
-WEIGHTS_PATH = 'keypoints_detection_model/weights_2'
-MODEL_PATH = '{} (trained_model2)'.format(MODEL_NAME)
+WEIGHTS_PATH = 'keypoints_detection_model/weights'
+MODEL_PATH = '{} (trained_model)'.format(MODEL_NAME)
 
 # augmentation configuration
 AUG_CONFIG = ['vertical_flip', 'horizontal_flip', 'sharpen', 'blur']
