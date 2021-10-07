@@ -212,26 +212,3 @@ def prepare_dataset(path_to_images: str, path_to_keypoints: str, valid_size: flo
     np.save(PATH_TO_VAL_IMAGES, val_images)
     np.save(PATH_TO_TRAIN_KEYPOINTS, train_keypoints)
     np.save(PATH_TO_VAL_KEYPOINTS, test_keypoints)
-
-
-# prepare_dataset(path_to_images=r'E:\DATASETS\idchess_zadanie\xtrain.npy',
-#                 path_to_keypoints=r'E:\DATASETS\idchess_zadanie\ytrain.npy',
-#                 valid_size=0.33)
-# datagen = CustomDataGen(
-#     path_to_images=r'E:\DATASETS\idchess_zadanie\train_images.npy',
-#     path_to_keypoints=r'E:\DATASETS\idchess_zadanie\train_keypoints.npy',
-#     batch_size=16,
-#     aug_config=[]
-# )
-#
-# for k in range(len(datagen)):
-#     img, keyp = datagen[k]
-#     print(img.shape, keyp.shape)
-#     # if img.shape != (16, 256, 256, 1):
-#     #     print(k)
-#     #     print(img.shape, keyp.shape)
-#     #     break
-#
-# datagen.show_image_data(num_of_examples=15)
-
-
