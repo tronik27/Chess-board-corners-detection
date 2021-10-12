@@ -1,13 +1,13 @@
 from typing import Tuple, Optional
 import tensorflow as tf
 from tensorflow.keras.layers import Dense, Conv2D, BatchNormalization, GlobalAveragePooling2D, Input, Add, LeakyReLU,\
-    MaxPooling2D, ReLU, Dropout
+    MaxPooling2D, Dropout
 from tensorflow.python.framework.ops import Tensor
 
 
 class CustomResNet18:
     def __init__(self, input_shape: Tuple[int, int, int], num_predictions: int, num_filters: int,
-                 regularization: Optional[float], input_name: str, output_name: str) -> None:
+                 regularization: Optional[float], input_name: str, output_name: str, nn_depth: int) -> None:
         """
         Custom implementation of the stripped-down ResNet for key points detection task.
         :param input_shape: input shape (height, width, channels).
@@ -16,6 +16,7 @@ class CustomResNet18:
         :param regularization: pass float < 1 (good is 0.0005) to make regularization or None to ignore it.
         :param input_name: name of the input tensor.
         :param output_name: name of the output tensor.
+        :param nn_depth: network depth factor, determines the number of residual blocks. Should be > 3!
         """
         self.input_shape = input_shape
         self.num_predictions = num_predictions
@@ -24,6 +25,7 @@ class CustomResNet18:
         self.num_filters = num_filters
         self.ker_reg = None if regularization is None else tf.keras.regularizers.l2(regularization)
         self.conv_kwargs = {'use_bias': False, 'padding': 'same', 'kernel_regularizer': self.ker_reg}
+        self.nn_depth = nn_depth
 
     def build(self) -> tf.keras.models.Model:
         """
@@ -39,8 +41,9 @@ class CustomResNet18:
         for _ in range(2):
             x = self.res_block(x, self.num_filters)
 
-        for i in range(5):
+        for i in range(self.nn_depth - 2):
             x = self.res_block(x, self.num_filters * 2 ** (i + 1), 2)
+            x = self.res_block(x, self.num_filters * 2 ** (i + 1))
             x = self.res_block(x, self.num_filters * 2 ** (i + 1))
 
         x = GlobalAveragePooling2D()(x)

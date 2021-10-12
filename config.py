@@ -19,6 +19,7 @@ NUM_EPOCHS = 135
 
 # Custom model parameters.
 NUM_FILTERS = 4
+NN_DEPTH = 6
 MODEL_NAME = 'keypoints_resnet_detector'
 NUM_PREDICTIONS = 8
 INPUT_SHAPE = (256, 256, 1)

@@ -15,6 +15,7 @@ class KeyPointsDetection:
                  target_size: Tuple[int, int, int],
                  num_predictions: int,
                  num_filters: int,
+                 nn_depth: int,
                  learning_rate: float,
                  model_name: str,
                  input_name: str,
@@ -27,6 +28,7 @@ class KeyPointsDetection:
         :param target_size: the size to which all images in the dataset are reduced.
         :param num_predictions: number of classes of images in dataset.
         :param num_filters: network expansion factor, determines the number of filters in start layer.
+        :param nn_depth: network depth factor, determines the number of residual blocks. Should be > 3!
         :param learning_rate: learning rate when training the model.
         :param model_name: name of model.
         :param input_name: name of the input tensor.
@@ -45,7 +47,8 @@ class KeyPointsDetection:
             regularization=regularization,
             input_name=input_name,
             output_name=output_name,
-            num_predictions=self.num_predictions
+            num_predictions=self.num_predictions,
+            nn_depth=nn_depth
         ).build()
         self.nn.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
                         loss=tf.keras.losses.MeanSquaredError(),

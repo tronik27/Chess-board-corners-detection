@@ -1,7 +1,7 @@
 from train_and_evaluate import KeyPointsDetection
 from Data_Preprocessing import prepare_dataset
 from config import PATH_TO_IMAGES, PATH_TO_KEYPOINTS, PATH_TO_TRAIN_IMAGES, PATH_TO_VAL_IMAGES,\
-    PATH_TO_TRAIN_KEYPOINTS, PATH_TO_VAL_KEYPOINTS, BATCH_SIZE, INPUT_SHAPE, NUM_PREDICTIONS, NUM_FILTERS,\
+    PATH_TO_TRAIN_KEYPOINTS, PATH_TO_VAL_KEYPOINTS, BATCH_SIZE, INPUT_SHAPE, NUM_PREDICTIONS, NUM_FILTERS, NN_DEPTH,\
     LEARNING_RATE, MODEL_NAME, NUM_EPOCHS, AUG_CONFIG, MODEL_PATH, SHOW_IMAGE_DATA, VALID_SIZE, SHOW_LEARNING_CURVES,\
     NUM_OF_EXAMPLES, INPUT_NAME, OUTPUT_NAME, WEIGHTS_PATH, REGULARIZATION
 
@@ -15,6 +15,7 @@ def main(prepare_data: bool, train: bool, evaluate: bool, save: bool):
         target_size=INPUT_SHAPE,
         num_predictions=NUM_PREDICTIONS,
         num_filters=NUM_FILTERS,
+        nn_depth=NN_DEPTH,
         learning_rate=LEARNING_RATE,
         model_name=MODEL_NAME,
         input_name=INPUT_NAME,
